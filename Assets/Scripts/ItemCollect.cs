@@ -11,11 +11,9 @@ public class ItemCollect : NetworkBehaviour
     private Dictionary<Item.VegetableType, int> inventory = new Dictionary<Item.VegetableType, int>();
     private Collider collidingItem;
 
-    private void Start()
+    void Start()
     {
-
-        // Populate inventory with vegetable types and their counts (0 by default)
-        // "Reflection" method - Uses foreach loop and references each declared VegetableType in the Item Class as "type"
+        // populate inventory dictionary with vegetable types and their counts (0 by default)
         foreach (Item.VegetableType type in System.Enum.GetValues(typeof(Item.VegetableType)))
         {
             inventory.Add(type, 0);
@@ -24,9 +22,8 @@ public class ItemCollect : NetworkBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && collidingItem != null)
-        {
-            Item item = collidingItem.GetComponent<Item>();
+        if (collidingItem != null && Input.GetKeyDown(KeyCode.Space)) {
+            Item item = collidingItem.gameObject.GetComponent<Item>();
             AddItemToInventory(item);
             ItemCollected?.Invoke(item.typeOfVeggie);
             PrintInventory();
@@ -40,20 +37,20 @@ public class ItemCollect : NetworkBehaviour
             return;
         }
 
-        if (collider.gameObject.CompareTag("Item"))
+        if (collider.CompareTag("Item"))
         {
             collidingItem = collider;
         }
     }
 
-    private void OnTriggerExit(Collider collider)
+    void OnTriggerExit(Collider collider)
     {
         if (!IsLocalPlayer)
         {
             return;
         }
 
-        if (collider.gameObject.CompareTag("Item"))
+        if (collider.CompareTag("Item"))
         {
             collidingItem = null;
         }
@@ -62,14 +59,12 @@ public class ItemCollect : NetworkBehaviour
     private void AddItemToInventory(Item item)
     {
         inventory[item.typeOfVeggie]++;
-        PrintInventory();
     }
 
     private void PrintInventory()
     {
         string output = "";
 
-        // okay, you lost me
         foreach (KeyValuePair<Item.VegetableType, int> pair in inventory)
         {
             output += string.Format("{0}: {1}; ", pair.Key, pair.Value);

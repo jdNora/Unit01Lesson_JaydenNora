@@ -3,13 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class CountGUI : MonoBehaviour
+
+public class CountGUI : NetworkBehaviour
 {
     private TextMeshProUGUI tmProElement;
     public string itemName;
     public NetworkVariable<int> count = new NetworkVariable<int>(0);
+
 
     // Start is called before the first frame update
     void Start()
@@ -18,32 +21,23 @@ public class CountGUI : MonoBehaviour
         count.OnValueChanged += OnCountValueChanged;
     }
 
-    public void UpdateCountBroadcast()
-    {
-        if (IsServer) // okay but why
-        {
-            UpdateCount();
-        }
-        else
-        {
-            UpdateCountRpc();
-        }
-    }
-
-    public override OnNetworkSpawn()
-    {
-        UpdateText();
-    }
-
     private void OnCountValueChanged(int previousValue, int newValue)
     {
         UpdateText();
     }
 
-    [Rpc(SendTo.Server)]
-    public void UpdateCountRpc()
+    public override void OnNetworkSpawn()
     {
-        UpdateCount();
+        UpdateText();
+    }
+
+    public void UpdateCountBroadcast()
+    {
+        if (IsServer) {
+            UpdateCount();
+        } else {
+            UpdateCountRpc();
+        }
     }
 
     public void UpdateCount()
@@ -51,9 +45,14 @@ public class CountGUI : MonoBehaviour
         count.Value++;
     }
 
+    [Rpc(SendTo.Server)]
+    public void UpdateCountRpc()
+    {
+        UpdateCount();
+    }
+    
     public void UpdateText()
     {
         tmProElement.text = itemName + ": " + count.Value;
     }
-
 }

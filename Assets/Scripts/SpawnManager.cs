@@ -6,16 +6,16 @@ using Unity.Netcode;
 public class SpawnManager : NetworkBehaviour
 {
     public GameObject[] lilyPads;
-    public float startDelay = 2.0f;
-    public float spawnInterval = 2.0f;
 
-    public override void OnNetworkSpawn() // Network equivalent of "Start"
+    // Start is called before the first frame update
+    public override void OnNetworkSpawn()
     {
         if (!IsServer)
         {
             return;
         }
-        InvokeRepeating("SpawnLilyPad", startDelay, spawnInterval);
+        
+        InvokeRepeating("SpawnLilyPad", 2.0f, 2.0f);
     }
 
     // Update is called once per frame

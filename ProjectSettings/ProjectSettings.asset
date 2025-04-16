@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: 4247ce314e58b6944b121209f3f30aac
+  productGUID: 7d22e135fbc3f8a42b693d9c428ceacb
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: Unit01Lesson_JaydenNora
+  productName: Unit 1 Lesson_AlexChow
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -161,8 +161,7 @@ PlayerSettings:
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier:
-    Standalone: com.DefaultCompany.Unit01Lesson-JaydenNora
+  applicationIdentifier: {}
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -682,14 +681,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Unit01Lesson_JaydenNora
+  metroPackageName: Unit 1 Lesson_AlexChow
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: Unit01Lesson_JaydenNora
+  metroApplicationDescription: Unit 1 Lesson_AlexChow
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -759,11 +758,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: ad32bbed-b58c-46c5-9929-013c574ebf6f
+  cloudProjectId: 90baed3f-f291-42fb-939e-1921f07e4b68
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Unit01Lesson_JaydenNora 2025-02-21_22-40-49
-  organizationId: jaynsir
+  projectName: Unit 1 Lesson_AlexChow
+  organizationId: a2chow
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

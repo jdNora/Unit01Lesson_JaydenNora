@@ -5,13 +5,13 @@ using Unity.Netcode;
 
 public class Drift : NetworkBehaviour
 {
-    public float speed = 10.0f;
-    public DriftDirection driftDirection;
+    public float speed = 5.0f;
     public enum DriftDirection
     {
         LEFT = -1,
         RIGHT = 1
     }
+    public DriftDirection driftDirection;
 
     // Start is called before the first frame update
     void Start()
@@ -27,13 +27,11 @@ public class Drift : NetworkBehaviour
             return;
         }
 
-        transform.Translate(Vector3.right * speed * (int)driftDirection * Time.deltaTime);
+        transform.Translate(Vector3.right * speed * Time.deltaTime * (int)driftDirection);
 
         if (transform.position.x < -80 || transform.position.x > 80)
         {
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                
+            for (int i = 0; i < transform.childCount; i++) {
                 NetworkObject player = transform.GetChild(i).GetComponent<NetworkObject>();
                 player.TryRemoveParent();
             }
@@ -42,17 +40,27 @@ public class Drift : NetworkBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (!IsServer)
+        {
+            return;
+        }
+
+        if (collision.gameObject.CompareTag("Player"))
         {
             NetworkObject player = collision.gameObject.GetComponent<NetworkObject>();
             player.TrySetParent(transform);
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    void OnCollisionExit(Collision collision)
     {
+        if (!IsServer)
+        {
+            return;
+        }
+
         if (collision.gameObject.CompareTag("Player"))
         {
             NetworkObject player = collision.gameObject.GetComponent<NetworkObject>();

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -11,6 +10,12 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         ItemCollect.ItemCollected += IncrementItem;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 
     void IncrementItem(Item.VegetableType veggieType)
